@@ -3,6 +3,29 @@
     <div
       class="flex flex-row h-150 overflow-hidden shrink-0 border-b border-b-[#9598a188]"
     >
+      <div
+        v-if="!isChartReady"
+        class="absolute w-full h-full inset-0 z-50 flex flex-col items-center justify-center bg-[#0c0c0d]"
+      >
+        <div class="text-white text-3xl font-bold mb-8">Welcome to Wow TradingView</div>
+        <div class="loading-effect mb-20 mt-10 w-40 h-40 relative">
+          <div class="ring" aria-hidden></div>
+          <div class="glow" aria-hidden></div>
+          <img
+            src="/wow.png"
+            alt="Loading"
+            class="wow-img w-40 h-40 rounded-full object-cover z-20"
+          />
+          <div class="particles" aria-hidden>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="text-white text-lg font-semibold">Loading Chart Data...</div>
+        <div class="text-[#9598a1] text-sm mt-2">Please wait while chart ready</div>
+      </div>
       <!-- Loading Overlay -->
       <div
         class="relative w-full bg-[#0c0c0d] h-full"
@@ -478,7 +501,6 @@ const localTimeStringToUTCTimestamp = (localTimeStr: string): UTCTimestamp => {
   const utcSeconds = Math.floor(date.getTime() / 1000);
   return (utcSeconds + UTC_PLUS_1_OFFSET) as UTCTimestamp;
 };
-
 
 const jumpToTimestamp = (
   timestamp: UTCTimestamp,
